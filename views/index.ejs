@@ -12,31 +12,37 @@
                 </div>
                 <% } %>
             <div class="table-responsive">
-                <table class="table table-stripped text-center">
-                    <thead>
-                        <tr class="table-dark">
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>name</th>
-                        <th>E-mail</th>
-                        <th>Phone</th>
-                        <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="" alt=""></td>
-                            <td>Huynh Ba Tan</td>
-                            <td>Huynhtan123@gmail.com</td>
-                            <td>0774564212</td>
-                            <td>
-                                <a href="" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
-                                <a href="" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <% if (users != '') { %>
+                    <table class="table table-stripped text-center">
+                        <thead>
+                            <tr class="table-dark">
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>name</th>
+                            <th>E-mail</th>
+                            <th>Phone</th>
+                            <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach((row, index) => { %>
+                                <tr class="align-middle">
+                                    <td><%= index %></td>
+                                    <td><img src="<%= row.image %>" width="50" class="img-thumbnail" /></td>
+                                    <td><%= row.name %></td>
+                                    <td><%= row.email %></td>
+                                    <td><%= row.phone %></td>
+                                    <td>
+                                        <a href="/edit/<%= row.id %>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                                        <a href="/delete/<%= row.id %>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                                    </td>
+                                </tr>
+                        <% }) %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <h1 class="text-center text-secondary mt-5">No users found in the database!</h1>
+                        <% } %>
             </div>
         </div>
     </div>
